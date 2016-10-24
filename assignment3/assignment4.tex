@@ -1,3 +1,54 @@
+\documentclass[twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\usepackage{anysize}
+\marginsize{3 cm}{2.7 cm}{2.7 cm}{2.7 cm}
+
+\begin{document}
+\title{4th assignment}
+\author{Joaquim Brugués Mora}
+\maketitle
+
+{\bf Note:} The code is adaptable for any non-degenerate system, but the integration times have been chosen such that the plots were clear enough. Systems diferent from the examples will run perfectly, but might produce not so nice plots if the integration times are not adapted.
+
+\
+
+Al plots are for a linear system, this means, of the form
+
+$$\dot{x} = A x .$$
+
+For $A = [2,-5;1,-2]$:
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.6]{circular.jpg}
+\end{figure}
+
+\newpage
+
+For $A = [3,-2;4,-1]$:
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.6]{spiral.jpg}
+\end{figure}
+
+For $A = [-1,0;3,2]$:
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.75]{saddle.jpg}
+\end{figure}
+
+\newpage
+
+And the MATLAB code:
+
+\begin{verbatim}
+
 clear all
 tol = 10^(-12);
 number_of_orbits = 20;
@@ -120,3 +171,6 @@ else
         end
     end
 end
+\end{verbatim}
+
+\end{document}
