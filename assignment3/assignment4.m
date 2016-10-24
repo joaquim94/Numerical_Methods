@@ -82,7 +82,7 @@ if (abs(imag(l1)) < tol)
         point1 = 10^(-5)*V(:,1);
         point2 = -10^(-5)*V(:,1);
         point3 = 10^(-5)*V(:,2);
-        point4 = 10^(-5)*V(:,2);
+        point4 = -10^(-5)*V(:,2);
         [~,W11] = ode45(F,[0,10],point1,odeoptions);
         [~,W12] = ode45(F,[0,10],point2,odeoptions);
         [~,W21] = ode45(F,[0,10],point3,odeoptions);
