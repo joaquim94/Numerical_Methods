@@ -1,5 +1,5 @@
 clear all
-
+%Data to check conditions at ci_rtbp.dat at https://mat-web.upc.edu/fme/nmds/
 %Input the variables
 
 tol = input('Tolerance (default= 5*10^(-14)): ');
@@ -28,5 +28,15 @@ J0 = J(x0);
 abserror = abs(J(orbit')-J0);
 
 %Plots:
-%plot(orbit(:,1),orbit(:,2),'.')
-%plot(1:length(abserror),-log(abserror),'.')
+figure (1)
+hold on
+title('Orbits for the system')
+plot(linspace(min(orbit(:,1))-10,max(orbit(:,1))+10,10000),zeros(10000,1),'k')
+plot(mu,0,'+b')
+plot(mu-1,0,'+b')
+plot(orbit(:,1),orbit(:,2),'.r','MarkerSize',1)
+
+figure (2)
+hold on
+title('Logarithm of the error')
+plot(1:length(abserror),-log(abserror),'.','MarkerSize',3)
