@@ -29,4 +29,4 @@ abserror = abs(J(orbit')-J0);
 
 %Plots:
 %plot(orbit(:,1),orbit(:,2),'.')
-%plot(1:length(abserror),-log(abserror,'.')
+%plot(1:length(abserror),-log(abserror),'.')
