@@ -10,7 +10,7 @@ function [ v ] = select_eigenvector( mu,i,sign )
     [~,A] = RTBPfield(x,mu);
     [V,D] = eig(A);
     j = 1;
-    while (j<5 &&(imag(D(j,j))~=0 || D(j,j)*sign < 0)) j = j+1; end
+    while (j<4 &&(imag(D(j,j))~=0 || D(j,j)*sign < 0)) j = j+1; end
     v = V(:,j);
 end
 
