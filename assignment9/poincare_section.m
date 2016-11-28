@@ -1,5 +1,5 @@
 function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
-%POINCARE_SECTION We compute the first crossing time (T) and
+%[Y,T] = POINCARE_SECTION(f,g,tol,t0,x0,def_dt) We compute the first crossing time (T) and
 %point (y) of the flow for the system x' = f(x). Arguments:
 %f: Function defining the system.
 %g: Vector ortogonal to the section (we assume it is always a hyperplane).
@@ -21,19 +21,17 @@ function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
     %integration step.
     if (abs(first_g_value) < tol)
         [tout,yout] = ode45(f,[t0,t0+def_dt],x0,odeoptions);
-        n = length(tout);
-        t = t + def_dt; x = yout(n,:)';
-        T = [T, tout']; Y = [Y, yout'];
+        t = t + def_dt; x = yout(end,:)';
+        T = [T, tout']; Y = [Y, x];
         first_g_value = g*x;
     end
     
     %We take integration steps until the sign of g*x changes.
     g_value = g*x;
-    while (first_g_value*g_value >= 0)
+    while (first_g_value*g_value > 0)
         [tout,yout] = ode45(f,[t,t+def_dt],x,odeoptions);
-        n = length(tout);
-        t = t + def_dt; x = yout(n,:)';
-        T = [T, tout']; Y = [Y, yout'];
+        t = t + def_dt; x = yout(end,:)';
+        T = [T, tout(end)]; Y = [Y, x];
         g_value = g*x;
     end
     
@@ -48,11 +46,14 @@ function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
         end
         
         dt = -g_value/(g*F);
-        [tout,yout] = ode45(f,[t,t+dt],x,odeoptions);
-        n = length(tout);
-        t = t+dt; x = yout(n,:)';
-        T = [T, t]; Y = [Y, x];
-        g_value = g*x;
+        [~,yout] = ode45(f,[t,t+dt],x,odeoptions);
+        t = t+dt; x = yout(end,:)';
+        %Save the point only if it belongs to the principal branch of the orbit.
+        x
+        g_value = g*x
+        if (first_g_value*g_value >= 0)
+            T = [T, t]; Y = [Y, x];
+        end
     end
 end
 
