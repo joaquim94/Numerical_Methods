@@ -1,7 +1,9 @@
 function [ L,C ] = LCRTBP( mu )
-%LCRTBP We compute the three equilibrium points and their values of C
+%[ L,C ] = LCRTBP( mu ) We compute the three equilibrium points and their values of C
 %(Jacobi constant) for mu.
+%Input arguments:
 %mu: A scalar mass parameter.
+%Output arguments:
 %L: A matrix 4x3, with the coordinates of the i-th equilibrium point at the
 %column i.
 %C: A row vector, with the values of the Jacobi constant at each

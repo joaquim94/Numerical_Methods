@@ -1,5 +1,12 @@
 function [ y ] = RTBP( x,mu )
-%RTBP function defining the 20-equations first order variational system.
+%[ y ] = RTBP( x,mu ) function defining the 20-equations first order variational system.
+%Input arguments:
+%x: Position, velocity and components of the differential of the flux, in a
+%vector.
+%mu: Mass parameter.
+%Output arguments:
+%y: Position, velocity and components of the differential of the flux, in a
+%vector.
     
     if size(x,1) ~= 1
         x = x';

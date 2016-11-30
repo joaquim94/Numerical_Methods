@@ -1,5 +1,11 @@
 function [ y,DF ] = RTBPfield( x,mu )
-%RTBPFIELD Function defining the RTBP (without the variational equations).
+%[ y,DF ] = RTBPFIELD( x,mu ) Function defining the RTBP (without the variational equations).
+%Input arguments:
+%x: Position and velocity.
+%mu: Mass parameter.
+%Output arguments:
+%y: 4x1 vector with velocity and accelerarion.
+%DF: 4x4 Jacobian matrix at x.
     
     y = zeros(4,1);
     y(1) = x(3); y(2) = x(4);
