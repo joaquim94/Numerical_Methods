@@ -15,10 +15,10 @@ function [ v,L ] = select_eigenvector( mu,i,sign )
     
     [L,~] = LCRTBP(mu);
     L = L(:,i);
-    [~,A] = RTBPfield(L,mu);
+    A = RTBPdiff(L,mu);
     [V,D] = eig(A);
     j = 1;
-    while (j<4 &&(imag(D(j,j))~=0 || D(j,j)*sign < 0)) j = j+1; end
+    while (imag(D(j,j))~=0 || D(j,j)*sign < 0) j = j+1; end
     v = real(V(:,j));
 end
 
