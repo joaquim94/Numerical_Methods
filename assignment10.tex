@@ -1,0 +1,27 @@
+\documentclass[twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\title{10th assignment}
+\author{Joaquim Brugués Mora}
+\maketitle
+
+\section{Code structure}
+
+The code is separated in various parts, which are listed below. All the functions are documented and descrived at the beginning of the code.
+
+\begin{itemize}
+\item {\bf RTBPfield.m :} The function that computes the field of the RTBP at a given position and velocity.
+\item {\bf RTBPdiff.m :} The function that computes the Jacobian matrix of the field at a given position and velocity.
+\item {\bf LCRTBP.m :} A function that returns the coordinates of $L_1, L_2$ and $L_3$ and the value of the Jacobi constant at each point, for a given value of $\mu$.
+\item {\bf poincare\textunderscore section.m :} A function that computes the first crossing and first crossing time for a Poincaré section of a system of ODEs.
+\item {\bf select\textunderscore eigenvector.m :} A function where we input a value of $\mu$, an index $i$ and a parameter sign ($+1$ or $-1$) and computes the unstable (or stable, depending on the sign parameter) eigenvector at $L_i$, and for the parameter $\mu$.
+\item {\bf orbit.m :} A script to draw the orbit until the first crossing for a value of $\mu$ (taking always $L_3$).
+\item {\bf assignment10A.m :} The script calculating the velocity at the first crossing for each value of mu for our given range between 0.001 and 0.5. WARNING: It is very slow.
+\item {\bf assignment10plot.m :} A script that takes the results from {\it assignment10A.m} and draws a plot in velocity, or position of first crossing.
+\end{itemize}
+
+\end{document}
