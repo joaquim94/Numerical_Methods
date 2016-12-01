@@ -14,7 +14,7 @@ odeoptions = odeset('Abstol',tol,'RelTol',tol);
 
 figure (1)
 hold on
-plot(linspace(-2.5,1.5,1000),zeros(1000,1))
+plot(linspace(-2,1.5,1000),zeros(1000,1),'k')
 for i=1:length(mu)
     [v,L] = select_eigenvector(mu(i),3,1);
 

@@ -3,7 +3,7 @@ clear all
 %Create and fill the file results.txt with all the results:
 %mu x vx T (half period).
 
-default_dt = 1;
+default_dt = 5;
 s = 1e-6;
 mu = [0.001:1e-5:0.015, 0.015:1e-4:0.05, 0.05:1e-3:0.49];
 n = length(mu);
