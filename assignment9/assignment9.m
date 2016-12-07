@@ -22,7 +22,7 @@ L = L(:,i);
 C = C(i);
 
 %Functions for integration and Jacobi constant:
-F = @(t,x) [x(3);x(4);2*x(4) + x(1) - (1-mu)*(x(1)-mu)/(sqrt((x(1)-mu)^2 + x(2)^2)^3) - mu*(x(1)-mu+1)/(sqrt((x(1)-mu+1)^2 + x(2)^2)^3); -2*x(3) + x(2)*(1 - (1-mu)/(sqrt((x(1)-mu)^2 + x(2)^2)^3) - mu/(sqrt((x(1)-mu+1)^2 + x(2)^2)^3))];
+F = RTBPfield(mu);
 J = @(x) 2*((x(1,:).^2+x(2,:).^2)/2 + (1-mu)./sqrt(((x(1,:)-mu).^2+x(2,:).^2)) + mu./sqrt((x(1,:)-mu+1).^2+x(2,:).^2) + mu*(1-mu)/2) - (x(3,:).^2+x(4,:).^2);
 
 %Initial point:

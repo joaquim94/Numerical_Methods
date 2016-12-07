@@ -1,6 +1,6 @@
 function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
 %[Y,T] = POINCARE_SECTION(f,g,tol,t0,x0,def_dt) We compute the first crossing time (T) and
-%point (y) of the flow for the system x' = f(x).
+%point (Y) of the flow for the system x' = f(x).
 %Arguments:
 %f: Function defining the system.
 %g: Vector ortogonal to the section (we assume it is always a hyperplane).
@@ -15,38 +15,55 @@ function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
 %T: The first crossing time.
 %
 %Parameters:
-%N_MAX_ITERATIONS: To avoid certain exceptions of looping, we impose a
-%maximum number of iterations, and the integrator to take a half step if it
-%surpasses it.
-    
-    N_MAX_ITERATIONS = 100;
+%N_MAX_ITERATIONS: Maximum number of iterations before executing a def_dt
+%step.
+
+    N_MAX_ITERATIONS = 20;
     
     first_g_value = g*x0;
     odeoptions = odeset('RelTol',tol,'AbsTol',tol);
     Y = x0; T = t0;
+    T1 = t0; T2 = t0;
     %If we begin at the section (or close enough), we make a first
     %integration step.
     if (abs(first_g_value) < tol)
         [~,yout] = ode45(f,[T,T+def_dt],x0,odeoptions);
         T = T + def_dt; Y = yout(end,:)';
+        T2 = T;
         first_g_value = g*Y;
     end
+    
+    G1 = first_g_value; G2 = G1;
     
     %We take integration steps until the sign of g*x changes.
     g_value = g*Y;
     while (first_g_value*g_value > 0)
+        T1 = T2; G1 = G2;
         [~,yout] = ode45(f,[T,T+def_dt],Y,odeoptions);
         T = T + def_dt; Y = yout(end,:)';
+        T2 = T;
         g_value = g*Y;
+        G2 = g_value;
     end
-    
-    k = 0;
     
     %When we reach this point of the program, we have crossed the section.
     %Now we just need to refine the solution until we get close enough to it.
+    k = 0;
     while (abs(g_value) >= tol)
-        k = k+1;
         F = f(T,Y);
+        k = k+1;
+        
+        %Make a special step if we reach the maximum number of refinement
+        %steps.
+        if k==N_MAX_ITERATIONS
+            Taux = (T1+T2)/2;
+            [~,yout] = ode45(f,[T,Taux],Y,odeoptions);
+            T = Taux; Y = yout(end,:)';
+            g_value = g*Y;
+            k = 0;
+            F = f(T,Y);
+        end
+        
         %We take in count the possibility of encounter with a fixed point
         %for the flow.
         if (norm(F) < tol)
@@ -57,15 +74,11 @@ function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
         [~,yout] = ode45(f,[T,T+dt],Y,odeoptions);
         T = T+dt; Y = yout(end,:)';
         g_value = g*Y;
-        
-        %"Bisection" step, to avoid the cases when the loop gets stuck
-        %between two steps.
-        if (k==N_MAX_ITERATIONS)
-            dt = -g_value/(2*g*f(T,Y));
-            [~,yout] = ode45(f,[T,T+dt],Y,odeoptions);
-            T = T+dt; Y = yout(end,:)';
-            g_value = g*Y;
-            k = 0;
+        if (first_g_value*g_value > 0 && abs(g_value) < abs(G1))
+            T1 = T; G1 = g_value;
+        end
+        if (first_g_value*g_value < 0 && abs(g_value) < abs(G2))
+            T2 = T; G2 = g_value;
         end
     end
 end

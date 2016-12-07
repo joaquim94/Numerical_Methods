@@ -15,7 +15,8 @@ function [ v,L ] = select_eigenvector( mu,i,sign )
     
     [L,~] = LCRTBP(mu);
     L = L(:,i);
-    A = RTBPdiff(L,mu);
+    DF = RTBPdiff(mu);
+    A = DF(L);
     [V,D] = eig(A);
     j = 1;
     while (imag(D(j,j))~=0 || D(j,j)*sign < 0) j = j+1; end
