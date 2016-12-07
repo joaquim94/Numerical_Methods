@@ -20,7 +20,7 @@ for i=1:length(mu)
 
     x0 = L - s*v;
 
-    F = @(t,x) RTBPfield(x,mu(i));
+    F = RTBPfield(mu(i));
     [~,T] = poincare_section(F,[0 1 0 0], tol, 0, x0, 1);
     [tout,z] = ode45(F,[0,T],x0,odeoptions);
 
