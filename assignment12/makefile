@@ -1,5 +1,5 @@
-dependency:
-    cp ../assignment9/poincare_section.m ../assignment9/RTBPfield.m ../assignment9/LCRTBP.m.
-    
+dependency: 
+	cp ../assignment9/poincare_section.m ../assignment9/RTBPfield.m ../assignment9/LCRTBP.m ../assignment9/RTBPdiff.m .
+	
 clean:
-    rm -f select_eigenvector.m LCRTBP.m poincare_section.m
+	rm -f poincare_section.m RTBPfield.m LCRTBP.m RTBPdiff.m
