@@ -23,28 +23,29 @@ function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
     first_g_value = g*x0;
     odeoptions = odeset('RelTol',tol,'AbsTol',tol);
     Y = x0; T = t0;
-    T1 = t0; T2 = t0;
     %If we begin at the section (or close enough), we make a first
     %integration step.
     if (abs(first_g_value) < tol)
         [~,yout] = ode45(f,[T,T+def_dt],x0,odeoptions);
         T = T + def_dt; Y = yout(end,:)';
-        T2 = T;
         first_g_value = g*Y;
     end
     
-    G1 = first_g_value; G2 = G1;
-    
     %We take integration steps until the sign of g*x changes.
     g_value = g*Y;
-    while (first_g_value*g_value > 0)
-        T1 = T2; G1 = G2;
-        [~,yout] = ode45(f,[T,T+def_dt],Y,odeoptions);
-        T = T + def_dt; Y = yout(end,:)';
-        T2 = T;
-        g_value = g*Y;
-        G2 = g_value;
+    while (not(any(first_g_value*g_value < 0)))
+        [tout,yout] = ode45(f,[T,T+def_dt],Y,odeoptions);
+        T = T + def_dt; Y = yout';
+        g_value = yout*g';
     end
+    
+    i=1;
+    while (first_g_value*g_value(i) > 0) i=i+1; end
+    T1 = tout(i-1); T2 = tout(i); Taux = (T1+T2)/2;
+    G1 = g_value(i-1); G2 = g_value(i);
+    [~,yout] = ode45(f,[T,Taux],Y,odeoptions);
+    T = Taux; Y = yout(end,:)';
+    g_value = g*Y;
     
     %When we reach this point of the program, we have crossed the section.
     %Now we just need to refine the solution until we get close enough to it.
