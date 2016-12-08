@@ -14,7 +14,7 @@ fclose(fileID);
 
 switch k
     case 1
-        plot(results(:,1),results(:,3),'.')
+        plot(results(:,1),results(:,3),'.','MarkerSize',1)
         title('Plot of mu-velocity in (0.001,0.5)')
         xlabel('mu'); ylabel('vx');
     case 2
@@ -22,11 +22,11 @@ switch k
         while (results(i,1)<0.1)
             i = i+1;
         end
-        plot(results(1:i,1),results(1:i,3),'.')
+        plot(results(1:i,1),results(1:i,3),'.','MarkerSize',1)
         title('Plot of mu-velocity in (0.001,0.1)')
         xlabel('mu'); ylabel('vx');
     case 3
-        plot(results(:,1),results(:,2),'.')
+        plot(results(:,1),results(:,2),'.','MarkerSize',1)
         title('Plot of mu-x in (0.001,0.5)')
         xlabel('mu'); ylabel('x');
 end
