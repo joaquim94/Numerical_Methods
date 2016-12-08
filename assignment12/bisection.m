@@ -6,14 +6,15 @@ function [ x ] = bisection( F,I0,tol )
 %tol: Tolerance for the stopping criteria of the method.
 %Output arguments:
 %x: Value of the zero for F between I0(1) and I0(2).
-
-    if (F(I0(1))*F(I0(2)) > 0)
-        error('Execution stopped. Invalid initial interval.');
-    end
     
     x = (I0(1)+I0(2))/2;
     I = [x, I0];
     a = [F(I(1)), F(I(2)), F(I(3))];
+    
+    if (a(2)*a(3) > 0)
+        error('Execution stopped. Invalid initial interval.');
+    end
+    
     while (abs(a(1)) >= tol && abs(I(2)-I(3)) >= tol)
         if (a(1)*a(2) < 0)
             x = (I(1)+I(2))/2;
