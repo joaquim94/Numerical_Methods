@@ -18,7 +18,7 @@ function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
 %N_MAX_ITERATIONS: Maximum number of iterations before executing a def_dt
 %step.
 
-    N_MAX_ITERATIONS = 20;
+    N_MAX_ITERATIONS = 50;
     
     first_g_value = g*x0;
     odeoptions = odeset('RelTol',tol,'AbsTol',tol);
@@ -34,11 +34,13 @@ function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
     %We take integration steps until the sign of g*x changes.
     g_value = g*Y;
     while (not(any(first_g_value*g_value < 0)))
+        Y = Y(:,end);
         [tout,yout] = ode45(f,[T,T+def_dt],Y,odeoptions);
         T = T + def_dt; Y = yout';
         g_value = yout*g';
     end
     
+    Y = Y(:,end);
     i=1;
     while (first_g_value*g_value(i) > 0) i=i+1; end
     T1 = tout(i-1); T2 = tout(i); Taux = (T1+T2)/2;
@@ -83,4 +85,3 @@ function [ Y,T ] = poincare_section( f,g,tol,t0,x0,def_dt )
         end
     end
 end
-
