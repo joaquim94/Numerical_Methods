@@ -1,5 +1,5 @@
 function [ y,x ] = step_heun( h,x0,y0,foo )
-%STEP_HEUN: fem una passa del metode de Heun (Runge-Kutta d'ordre 2).
+%[y,x] = step_heun(h,x0,y0,foo) Fem una passa del metode de Heun (Runge-Kutta d'ordre 2).
 %Variables:
 %
 %h: Pas a usar.
