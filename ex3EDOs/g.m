@@ -1,6 +1,6 @@
 function [ z ] = g( x,y )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%[z] = g(x,y) z = -3*y. Simple function to test the code.
+
     
     z = -3*y;
     
