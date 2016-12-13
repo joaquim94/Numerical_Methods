@@ -1,5 +1,5 @@
 function [ T,X,I ] = DOPRI45( foo,T0,x0,tol,h )
-%METHOD_HEUN: Implementacio del metode DOPRI45 amb pas variable.
+%[T,X,I] = DOPRI45(foo,T0,x0,tol,h) Implementacio del metode DOPRI45 amb pas variable.
 %
 %foo: Funcio que defineix el sistema. Ha de tenir per sortides vectors
 %columna
