@@ -1,5 +1,5 @@
 function [ H ] = new_stepsize_DOPRI45( H,tol,x,y,foo )
-%NEW_STEPSIZE_DOPRI45 Calcul del seguent pas a partir de
+%[H] = new_stepsize_DOPRI45(H,tol,x,y,foo) Calcul del seguent pas a partir de
 %tol: Tolerancia presa
 %(x,y): Instant i posicio de l'anterior pas.
 %foo: Funcio que defineix el sistema
