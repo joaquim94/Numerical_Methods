@@ -1,5 +1,5 @@
 function [ z ] = fun( x,y )
-%FUN: Funcio que defineix la EDO per a provar el sistema.
+%[z] = fun(x,y) Funcio que defineix la EDO per a provar el sistema.
     
     z = zeros(4,1);
     r = norm(y(1:2))^3;
