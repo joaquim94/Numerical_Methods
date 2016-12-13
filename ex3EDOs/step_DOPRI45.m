@@ -1,5 +1,5 @@
 function [ y,x ] = step_DOPRI45( h,x0,y0,foo,ord )
-%STEP_DOPRI45: Un pas d'un Runge-Kutta d'ordre depenent de l'entrada (usem
+%[x,y] = step_DOPRI45(h,x0,y0,foo,ord) Un pas d'un Runge-Kutta d'ordre depenent de l'entrada (usem
 %dos metodes:
 %
 %h: Pas a utilitzar.
