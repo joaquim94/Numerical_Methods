@@ -1,5 +1,5 @@
 function [ H ] = new_stepsize_heun( H,tol,x,y,foo )
-%NEW_STEPSIZE: Calculem el nou pas a partir de l'anterior (H), la
+%[H] = new_stepsize_heun(H,tol,x,y,foo) Calculem el nou pas a partir de l'anterior (H), la
 %tolerancia, i el punt actual, pel metode de Heun i dividint per dos el pas
     
     
