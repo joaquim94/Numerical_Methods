@@ -1,5 +1,5 @@
 function [ T,X,passos ] = method_heun( foo,T0,x0,tol,h )
-%METHOD_HEUN: Implementacio del metode de Heun amb pas variable.
+%[T,X,passos] = method_heun(foo,T0,x0,tol,h) Implementacio del metode de Heun amb pas variable.
 %
 %foo: Funcio que defineix el sistema. Ha de tenir per sortides vectors
 %columna
